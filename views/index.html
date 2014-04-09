@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en-US"> 
+<head>
+<meta charset="UTF-8">
+<title>Gralk: h4x0r1z3!</title>
+<link rel="stylesheet" href="/stylesheets/main.css" type="text/css">
+<script src="http://192.168.25.199:7007/socket.io/socket.io.js"></script>
+</head>
+<body>
+  <h1>Gralk!</h1>
+<div id="container"> 
+  <div id="chat-screen"></div>
+  <input type="text" placeholder="Enter text here" class="message-input" />
+  <button type="button" id="send-message">send</button> 
+</div>
+<script>
+var serverAddr = 'http://192.168.25.199';
+var socket = io.connect(serverAddr);
+
+socket.on('message', function(data) {
+    if (jx("chat-screen").innerHTML !== "")
+      jx("chat-screen").innerHTML = jx("chat-screen").innerHTML + "<br />";
+    jx("chat-screen").innerHTML = jx("chat-screen").innerHTML + "<span>" + data + "</span>";
+});
+
+socket.on('mastermind', function(data) {
+    if (jx("chat-screen").innerHTML !== "")
+      jx("chat-screen").innerHTML = jx("chat-screen").innerHTML + "<br />";
+    jx("chat-screen").innerHTML = jx("chat-screen").innerHTML + "<span class='mastermind'>" + data + "</span>";
+});
+
+// ### Event Listeners ###
+
+// Event: send input text to the server when user clicks 'send' button
+jx("send-message").addEventListener('click', function() {
+    msg = jx("message-input").value.trim();
+    if (msg.length === 0) return;
+    socket.emit('message', msg);
+    jx('message-input').value = "";
+});
+
+// Event: activate 'send' button when user hits Enter key
+jx("message-input").addEventListener('keydown', function(e) {
+    if (e.keyCode === 13) {
+      jx('send-message').click();
+    }
+});
+
+// ### Helper Methods ###
+
+// Helper: searches the DOM for an Element with the given Id, Class or Tag name, in that order
+function jx(identifier) {
+  result = document.getElementById(identifier);
+  if (result === null) {
+    result = document.getElementsByClassName(identifier);
+    if (result.length === 0)
+      result = document.getElementsByTagName(identifier);
+  }
+  return (((result !== null) && (result.length == 1)) ? result[0] : result);
+}
+</script>
+</body>
+</html>

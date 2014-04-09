@@ -1,0 +1,66 @@
+@font-face {
+  font-family: 'Comic Neue';
+  src: url('/fonts/ComicNeue-Light.ttf')  format('truetype'); /* Safari, Android, iOS */
+  font-weight: 100;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Comic Neue';
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background-color: purple;
+  height: 100%;
+}
+
+body > h1 {
+   text-align: center;
+   margin: 10px 0 10px 0;
+}
+
+#container {
+  height: 70%;
+  width: 50%;
+  margin: auto;
+  text-align: center;
+}
+
+#container > #chat-screen {
+  width: 100%;
+  background-color: white;
+  height: 90%;
+  border-radius: 5px;
+  text-align: left;
+  font-family: 'Palatino', serif;
+  margin-bottom: 5px;
+  box-shadow: 5px 3px 30px 3px;
+  padding: 1px;
+}
+
+#container > .message-input {
+  width: 90%;
+  height: 2em;
+  padding-left: 3px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+#container > #send-message {
+  width: 9%;
+  height: 2em;
+}
+
+#chat-screen > span.mastermind {
+  color: purple;
+  font-style: italic;
+}
