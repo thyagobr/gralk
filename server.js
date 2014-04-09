@@ -16,11 +16,17 @@ var server = app.listen(7007, function() {
 var io = socketio.listen(server);
 io.sockets.on('connection', function(socket) {
   console.log("Connection!");
+  
+  // Message of the Day
   socket.emit('mastermind', '!gralk: bem-vindo ao gralk!');
   socket.emit('mastermind', '!gralk: escolha seu apelido usando: /nick <strong>apelido</strong>');
   socket.emit('mastermind', '!grak: exemplo: /nick thyagobr');
   socket.emit('mastermind', '!grak: divirta-se!');
+
+  // Starting nickname
   socket.nickname = "RandomDude" + Math.floor(Math.random()*9999);
+
+  // onMessage
   socket.on('message', function(data) {
     data = validator.escape(data);
     console.log(socket.id + ": " + data);
@@ -36,6 +42,11 @@ io.sockets.on('connection', function(socket) {
       return;
     }
     io.sockets.emit('message', socket.nickname + ": " + data);
+  });
+
+  socket.on('geoloc', function(data) {
+    console.log("geoloc!");
+    console.log(data);
   });
 });
 

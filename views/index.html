@@ -15,7 +15,14 @@
 </div>
 <script>
 var serverAddr = 'http://192.168.25.199';
-var socket = io.connect(serverAddr);
+var socket = io.connect(window.location.hostname);
+
+navigator.geolocation.getCurrentPosition(function success(geoloc) {
+    latitude = geoloc.coords.latitude.toFixed(4);
+    longitude = geoloc.coords.longitude.toFixed(4);
+    console.log(latitude + ", " + longitude);
+    socket.emit('geoloc', { latitude: latitude, longitude: longitude });
+});
 
 socket.on('message', function(data) {
     if (jx("chat-screen").innerHTML !== "")
