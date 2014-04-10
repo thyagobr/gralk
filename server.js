@@ -9,7 +9,7 @@ app.get('/', function(req, res) {
   res.sendfile('views/index.html');
 });
 
-var server = app.listen(7007, function() {
+var server = app.listen(process.env.PORT || 5000, function() {
   console.log("Listening on port %d", server.address().port);
 });
 
