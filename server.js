@@ -41,12 +41,15 @@ io.sockets.on('connection', function(socket) {
       socket.nickname = tokenize[1];
       return;
     }
-    io.sockets.emit('message', socket.nickname + ": " + data);
+    console.log("### Emiting to room: " + socket.room);
+    io.sockets.to(socket.room).emit('message', socket.nickname + ": " + data);
   });
 
   socket.on('geoloc', function(data) {
     console.log("geoloc!");
     console.log(data);
+    socket.room = data.latitude.concat(data.longitude);
+    socket.join(socket.room);
   });
 });
 
