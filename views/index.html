@@ -19,10 +19,11 @@ var socket = io.connect(window.location.hostname);
 navigator.geolocation.getCurrentPosition(function success(geoloc) {
     latitude = geoloc.coords.latitude.toFixed(4);
     longitude = geoloc.coords.longitude.toFixed(4);
+    accuracy = geoloc.coords.accuracy;
     console.log(latitude + ", " + longitude);
-    socket.emit('geoloc', { latitude: latitude, longitude: longitude });
+    socket.emit('geoloc', { latitude: latitude, longitude: longitude, accuracy: accuracy });
     }, function failure() { console.log("geoloc fail"); }, 
-    { timeout: 5000, maxmimumAge: 600000, enableHighAccuracy: true});
+    { enableHighAccuracy: true, maximumAge: 30000, timeout: 27000 });
 
 socket.on('message', function(data) {
     console.log("incoming data");
