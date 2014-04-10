@@ -22,7 +22,7 @@ navigator.geolocation.getCurrentPosition(function success(geoloc) {
     accuracy = geoloc.coords.accuracy;
     console.log(latitude + ", " + longitude);
     socket.emit('geoloc', { latitude: latitude, longitude: longitude, accuracy: accuracy });
-    }, function failure() { console.log("geoloc fail"); }, 
+    }, function failure() { alert("geoloc fail"); }, 
     { enableHighAccuracy: true, maximumAge: 30000, timeout: 27000 });
 
 socket.on('message', function(data) {
