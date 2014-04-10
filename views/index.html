@@ -21,7 +21,8 @@ navigator.geolocation.getCurrentPosition(function success(geoloc) {
     longitude = geoloc.coords.longitude.toFixed(4);
     console.log(latitude + ", " + longitude);
     socket.emit('geoloc', { latitude: latitude, longitude: longitude });
-});
+    }, function failure() { console.log("geoloc fail"); }, 
+    { timeout: 5000, maxmimumAge: 600000, enableHighAccuracy: true});
 
 socket.on('message', function(data) {
     console.log("incoming data");
