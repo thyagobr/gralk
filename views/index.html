@@ -17,8 +17,8 @@
 var socket = io.connect(window.location.hostname);
 
 navigator.geolocation.getCurrentPosition(function success(geoloc) {
-    latitude = geoloc.coords.latitude.toFixed(4);
-    longitude = geoloc.coords.longitude.toFixed(4);
+    latitude = geoloc.coords.latitude.toFixed(2);
+    longitude = geoloc.coords.longitude.toFixed(2);
     accuracy = geoloc.coords.accuracy;
     console.log(latitude + ", " + longitude);
     socket.emit('geoloc', { latitude: latitude, longitude: longitude, accuracy: accuracy });
