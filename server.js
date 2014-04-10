@@ -20,8 +20,8 @@ io.sockets.on('connection', function(socket) {
   // Message of the Day
   socket.emit('mastermind', '!gralk: bem-vindo ao gralk!');
   socket.emit('mastermind', '!gralk: escolha seu apelido usando: /nick <strong>apelido</strong>');
-  socket.emit('mastermind', '!grak: exemplo: /nick thyagobr');
-  socket.emit('mastermind', '!grak: divirta-se!');
+  socket.emit('mastermind', '!gralk: exemplo: /nick thyagobr');
+  socket.emit('mastermind', '!gralk: divirta-se!');
 
   // Starting nickname
   socket.nickname = "RandomDude" + Math.floor(Math.random()*9999);
@@ -34,10 +34,10 @@ io.sockets.on('connection', function(socket) {
     if (tokenize[0] == "/nick") {
       console.log("NICKNAME: " + tokenize[1]);
       if (tokenize[1].length > 10) {
-        socket.emit('message', '!gralk: Tamanho máximo do nickname: 10 chars');
+        socket.emit('mastermind', '!gralk: Tamanho máximo do nickname: 10 chars');
         return;
       }
-      io.sockets.emit('message', '!gralk: ' + socket.nickname + ' agora é: ' + tokenize[1]); 
+      io.sockets.emit('mastermind', '!gralk: <strong>' + socket.nickname + '</strong> agora é: <strong>' + tokenize[1] + "</strong>"); 
       socket.nickname = tokenize[1];
       return;
     }
