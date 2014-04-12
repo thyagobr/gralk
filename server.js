@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var socketio = require('socket.io');
 var validator = require('validator');
+var users = [];
 
 app.use(express.static('public'));
 
@@ -16,6 +17,7 @@ var server = app.listen(process.env.PORT || 5000, function() {
 var io = socketio.listen(server);
 io.sockets.on('connection', function(socket) {
   console.log("Connection!");
+  users.push(socket);
   
   // Message of the Day
   socket.emit('mastermind', '!gralk: bem-vindo ao gralk!');
@@ -40,6 +42,13 @@ io.sockets.on('connection', function(socket) {
       io.sockets.emit('mastermind', '!gralk: <strong>' + socket.nickname + '</strong> agora é: <strong>' + tokenize[1] + "</strong>"); 
       socket.nickname = tokenize[1];
       return;
+    } else if (tokenize[0] == "/users") {
+      users = [];
+      socket.emit('mastermind', '!gralk: listing users...');
+      io.sockets.clients().forEach(function (sock) {
+        users.push(sock.nickname);
+      });
+      socket.emit('mastermind', '!gralk: ' + users.toString());
     }
     console.log("### Emiting to room: " + socket.room);
     io.sockets.to(socket.room).emit('message', socket.nickname + ": " + data);
