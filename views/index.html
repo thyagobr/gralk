@@ -30,12 +30,14 @@ socket.on('message', function(data) {
     if (jx("chat-screen").innerHTML !== "")
       jx("chat-screen").innerHTML = jx("chat-screen").innerHTML + "<br />";
     jx("chat-screen").innerHTML = jx("chat-screen").innerHTML + "<span>" + data + "</span>";
+    jx("chat-screen").scrollTop = jx("chat-screen").scrollHeight;
 });
 
 socket.on('mastermind', function(data) {
     if (jx("chat-screen").innerHTML !== "")
       jx("chat-screen").innerHTML = jx("chat-screen").innerHTML + "<br />";
     jx("chat-screen").innerHTML = jx("chat-screen").innerHTML + "<span class='mastermind'>" + data + "</span>";
+    jx("chat-screen").scrollTop = jx("chat-screen").scrollHeight;
 });
 
 // ### Event Listeners ###
