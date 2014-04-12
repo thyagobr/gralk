@@ -49,6 +49,7 @@ io.sockets.on('connection', function(socket) {
         users.push(sock.nickname);
       });
       socket.emit('mastermind', '!gralk: ' + users.toString());
+      return;
     }
     console.log("### Emiting to room: " + socket.room);
     io.sockets.to(socket.room).emit('message', socket.nickname + ": " + data);
